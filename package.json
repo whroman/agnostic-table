@@ -1,0 +1,17 @@
+{
+  "name": "agnostic-table",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "istanbul cover _mocha -- -R spec"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^3.0.0",
+    "istanbul": "^0.3.15",
+    "lodash": "^3.9.3",
+    "mocha": "^2.2.5"
+  }
+}
