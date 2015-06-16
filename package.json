@@ -4,13 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "istanbul cover _mocha -- -R spec"
+    "test": "istanbul cover _mocha -- -R spec",
+    "lint": "eslint ./lib/"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "chai": "^3.0.0",
     "codeclimate-test-reporter": "0.0.4",
+    "eslint": "^0.23.0",
     "istanbul": "^0.3.15",
     "lodash": "^3.9.3",
     "mocha": "^2.2.5"
