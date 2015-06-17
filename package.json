@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "istanbul cover _mocha -- -R spec",
-    "lint": "eslint ./lib/"
+    "lint:lib": "eslint ./lib",
+    "lint:test": "eslint --env node,mocha --rule strict:0 ./test"
   },
   "author": "",
   "license": "ISC",
