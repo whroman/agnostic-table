@@ -6,7 +6,9 @@
   "scripts": {
     "test": "istanbul cover _mocha -- -R spec",
     "lint:lib": "eslint ./lib",
-    "lint:test": "eslint --env node,mocha --rule strict:0 ./test"
+    "lint:test": "eslint --env node,mocha --rule strict:0 ./test",
+    "build:client": "browserify ./lib/table.js -o ./dist/agnosticTable.js",
+    "build:demo": "browserify ./demo/js/index.js --debug -o ./demo/build/build.js"
   },
   "author": "",
   "license": "ISC",
@@ -15,7 +17,11 @@
     "codeclimate-test-reporter": "0.0.4",
     "eslint": "^0.23.0",
     "istanbul": "^0.3.15",
-    "lodash": "^3.9.3",
     "mocha": "^2.2.5"
+  },
+  "dependencies": {
+    "angular": "^1.4.1",
+    "browserify": "^10.2.4",
+    "lodash": "^3.9.3"
   }
 }
