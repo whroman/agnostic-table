@@ -143,8 +143,6 @@ var order = function () {
 module.exports = order;
 
 },{}],5:[function(require,module,exports){
-var _ = require('lodash');
-
 var paginate = function (options) {
     'use strict';
 
@@ -181,7 +179,7 @@ var paginate = function (options) {
         this.disabled = shouldNavBeDisabled.bind(this)();
         this.firstRow = this.currentPage * this.maxRows;
 
-        this.rows = _.slice(table.order.rows, this.firstRow, this.firstRow + this.maxRows);
+        this.rows = table.order.rows.slice(this.firstRow, this.firstRow + this.maxRows);
     };
 
     _paginate.displayCurrent = function () {
@@ -221,7 +219,7 @@ var paginate = function (options) {
 
 module.exports = paginate;
 
-},{"lodash":6}],6:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
 (function (global){
 /**
  * @license
