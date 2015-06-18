@@ -2,48 +2,123 @@
 <html lang="en" >
 <head>
     <meta charset="utf-8">
-    <title>Minesweeper</title>
+    <title>Agnostic Table</title>
 
-    <!-- <link rel="stylesheet" href="Resources/build/build.css"/> -->
+    <link rel="stylesheet" href="node_modules/foundation-sites/css/foundation.min.css"/>
+    <link rel="stylesheet" href="demo/css/app.css"/>
 
 </head>
-<body>
-    <table
-        ng-app="ControllerTeamsList"
-        ng-controller="ControllerTeamsList"
-    >
+<body id="body">
+    <div class="row">
+        <div class="small-11 column">
+            <h1>Agnostic Table</h1>
+            <h4>A lean view-framework-agnostic table abstraction for Javascript</h4>
+            <hr>
+            <h1>Angular</h1>
 
-        <tr
-            ng-repeat='row in table.paginate.rows'
-        >
-            <td
-                ng-repeat="keyObj in table.keys"
+            <div
+                ng-app="ControllerTeamsList"
+                ng-controller="ControllerTeamsList"
+                ng-cloak
             >
-                <a
-                    ng-if="keyObj.value !== 'links'"
-                    class="pad-lr-2x pad-tb width-full"
-                >
-                    <div class="spacer-xs"></div>
-                    <div ng-if="typeOf(row[keyObj.value]) !== 'object'">
-                      <div>{{ row[keyObj.value] }}</div>
-                      <div class="spacer-sm"></div>
-                      <div>{{row[keyObj.value]}}</div>
+
+                <div class="row">
+                    <div class="column small-6">
+                        <input
+                            type="text"
+                            placeholder="Search by Name or Region"
+                            ng-model="table.filter.value"
+                            ng-change="table.filter.onValChange()"
+                            tabindex="1"
+                            class="text-xxs text-gray-dark text-thin width-full spacer-xl pad bg-white"
+                        />
                     </div>
-                    <div
-                        ng-if="typeOf(row[keyObj.value]) === 'object'"
-                        ng-repeat="val in :: row[keyObj.value] track by $index"
-                        class="pull-left"
-                    >
-                      <div ng-if="keyObj.value != 'links'">{{val.text}}</div>
+                    <div class="column small-6">
+                        <div class="row collapse text-white"></div>
                     </div>
-                </a>
+                </div>
 
-            </td>
-        </tr>
+                <table class="width-full">
+                    <thead class="unselectable">
+                      <tr class="bg-gray-dark">
+                        <th
+                            ng-repeat="keyObj in table.keys"
+                            ng-click="table.order.set(keyObj.value)"
+                            class="text-white text-thin unselectable"
+                        >
+                          <div class="pad-lr-2x pad-tb width-full"><span>{{keyObj.display}}</span><span class="table-arrow"></span></div>
+                        </th>
+                      </tr>
+                    </thead>
 
-    </table>
+                    <tbody>
+                        <tr
+                            ng-repeat='row in table.paginate.rows'
+                        >
+                            <td
+                                ng-repeat="keyObj in table.keys"
+                            >
+                                <a
+                                    ng-if="keyObj.value !== 'links'"
+                                    class="pad-lr-2x pad-tb width-full"
+                                >
+                                    <div class="spacer-xs"></div>
+                                    <div ng-if="typeOf(row[keyObj.value]) !== 'object'">
+                                      <div>{{ row[keyObj.value] }}</div>
+                                      <div class="spacer-sm"></div>
+                                    </div>
+                                    <div
+                                        ng-if="typeOf(row[keyObj.value]) === 'object'"
+                                        ng-repeat="val in :: row[keyObj.value] track by $index"
+                                        class="pull-left"
+                                    >
+                                      <div ng-if="keyObj.value != 'links'">{{val.text}}</div>
+                                    </div>
+                                </a>
 
-    <div>foo</div>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+
+                <div class="row collapse unselectable">
+                    <ul class="button-group round row collapse">
+
+                        <li
+                            ng-click="table.paginate.previous()"
+                            class="column small-4"
+                        >
+                            <div
+                                ng-class="{disabled : table.paginate.disableButtons()}"
+                                class="text-xxs width-full pad text-center button"
+                            >
+                                <div class="text-valign">Previous</div>
+                            </div>
+                        </li><li class="column small-4">
+                            <div class="text-black bg-gray-light button disabled width-full">
+                                <div class="text-valign">Page {{ table.paginate.displayCurrent() }} of {{ table.paginate.numOfPages }}</div>
+                            </div>
+                        </li><li
+                            ng-click="table.paginate.next()"
+                            class="column small-4"
+                        >
+                            <div
+                                ng-class="{disabled : table.paginate.disableButtons()}"
+                                class="text-xxs width-full pad text-center button"
+                            >
+                                <div class="text-valign">Next</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <script type="text/javascript" src="./dist/agnosticTable.js"></script>
+
     <script type="text/javascript" src="./demo/build/build.js"></script>
 </body>
 </html>

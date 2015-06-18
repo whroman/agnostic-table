@@ -1,1 +1,2 @@
-module.exports = require('./lib/table.js');
+agnosticTable = require('./lib/table.js');
+module.exports = agnosticTable;

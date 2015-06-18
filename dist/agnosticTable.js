@@ -1,4 +1,7 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+FOO = require('./lib/table.js');
+module.exports = FOO;
+},{"./lib/table.js":2}],2:[function(require,module,exports){
 var tableFilter = require('./tableFilter');
 var tableOrder = require('./tableOrder');
 var tablePaginate = require('./tablePaginate');
@@ -30,7 +33,7 @@ var TableClass = (function () {
 
 module.exports = TableClass;
 
-},{"./tableFilter":2,"./tableOrder":3,"./tablePaginate":4}],2:[function(require,module,exports){
+},{"./tableFilter":3,"./tableOrder":4,"./tablePaginate":5}],3:[function(require,module,exports){
 var _ = require('lodash');
 
 var filter = function (keys) {
@@ -55,6 +58,11 @@ var filter = function (keys) {
             _filter.keys.push(keyObj.value);
         }
     });
+
+    _filter.onValChange = function () {
+        table.paginate.currentPage = 0;
+        table.digest();
+    };
 
     _filter.digest = function () {
         if (this.value === '') {
@@ -84,7 +92,7 @@ var filter = function (keys) {
 
 module.exports = filter;
 
-},{"lodash":5}],3:[function(require,module,exports){
+},{"lodash":6}],4:[function(require,module,exports){
 var _ = require('lodash');
 
 var order = function () {
@@ -120,7 +128,7 @@ var order = function () {
 
 module.exports = order;
 
-},{"lodash":5}],4:[function(require,module,exports){
+},{"lodash":6}],5:[function(require,module,exports){
 var _ = require('lodash');
 
 var paginate = function (options) {
@@ -134,9 +142,13 @@ var paginate = function (options) {
 
     _paginate.currentPage = 0;
     _paginate.firstRow = 0;
-    _paginate.maxRows = options.maxRows || 10;
+    _paginate.maxRows = 10;
     _paginate.numOfPages = 0;
     _paginate.rows = [];
+
+    if (options !== undefined && options.maxRows !== undefined) {
+        _paginate.maxRows = options.maxRows;
+    }
 
     // Total number of pages for current set of queried data
     var determineNumOfPages = function () {
@@ -195,7 +207,7 @@ var paginate = function (options) {
 
 module.exports = paginate;
 
-},{"lodash":5}],5:[function(require,module,exports){
+},{"lodash":6}],6:[function(require,module,exports){
 (function (global){
 /**
  * @license

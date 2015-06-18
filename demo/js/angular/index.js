@@ -25,10 +25,6 @@ angular.module('ControllerTeamsList', [])
             display: 'Country',
             value: 'country',
             filter: true
-        },
-        {
-            display: 'Links',
-            value: 'links'
         }
     ];
 

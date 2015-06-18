@@ -1,0 +1,33 @@
+.width-full {
+    width: 100%;
+}
+
+#body .text-black {
+    color: #000;
+}
+
+#body .bg-gray-light {
+    background-color: #F5F5F5;
+}
+
+#body .button-group .column {
+    margin: 0;
+}
+
+#body .button-group .disabled {
+    opacity: 1;
+}
+
+.unselectable::selection {
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.unselectable *::selection {
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+[ng-cloak] {
+    display: none;
+}
