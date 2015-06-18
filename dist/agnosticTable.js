@@ -1,6 +1,6 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-FOO = require('./lib/table.js');
-module.exports = FOO;
+agnosticTable = require('./lib/table.js');
+module.exports = agnosticTable;
 },{"./lib/table.js":2}],2:[function(require,module,exports){
 var tableFilter = require('./tableFilter');
 var tableOrder = require('./tableOrder');
@@ -93,8 +93,6 @@ var filter = function (keys) {
 module.exports = filter;
 
 },{"lodash":6}],4:[function(require,module,exports){
-var _ = require('lodash');
-
 var order = function () {
     'use strict';
 
@@ -120,7 +118,23 @@ var order = function () {
     };
 
     _order.digest = function () {
-        this.rows = _.sortByOrder(table.filter.rows, [this.latestInput], [!this.reverse]);
+        var rows = table.filter.rows.sort(function (a, b) {
+            if (a[this.latestInput] < b[this.latestInput]) {
+                return -1;
+            }
+
+            if (a[this.latestInput] > b[this.latestInput]) {
+                return 1;
+            }
+
+            return 0;
+        }.bind(this));
+
+        if (this.reverse) {
+            rows.reverse();
+        }
+
+        this.rows = rows;
     };
 
     return _order;
@@ -128,7 +142,7 @@ var order = function () {
 
 module.exports = order;
 
-},{"lodash":6}],5:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 var _ = require('lodash');
 
 var paginate = function (options) {
