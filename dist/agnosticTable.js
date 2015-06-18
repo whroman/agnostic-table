@@ -53,11 +53,15 @@ var filter = function (keys) {
         the property names listed here.
     */
     _filter.keys = [];
-    _.each(keys, function (keyObj) {
+
+    var keysIndex = keys.length;
+    while (keysIndex--) {
+        var keyObj = keys[keysIndex];
         if (keyObj.filter === true) {
-            _filter.keys.push(keyObj.value);
+            _filter.keys.unshift(keyObj.value);
         }
-    });
+    }
+
 
     _filter.onValChange = function () {
         table.paginate.currentPage = 0;
@@ -68,19 +72,30 @@ var filter = function (keys) {
         if (this.value === '') {
             this.rows = table.rows.all;
         } else {
-            this.rows = _.filter(table.rows.all, function (row) {
+            this.rows = table.rows.all.filter(function (row) {
                 var include = false;
                 // Create version of row that only contains properties in `filter.keys` list
                 var filterRow = _.pick(row, this.keys);
 
-                _.each(filterRow, function (rowValue) {
+                // _.each(filterRow, function (rowValue) {
+                //     rowValue = (rowValue || '').toLowerCase();
+                //     var filterValue = this.value.toLowerCase();
+                //     include = rowValue.indexOf(filterValue) > -1;
+                //     if (include) {
+                //         return false;
+                //     }
+                // }.bind(this));
+
+                var propName;
+                for (propName in filterRow) {
+                    var rowValue = filterRow[propName];
                     rowValue = (rowValue || '').toLowerCase();
                     var filterValue = this.value.toLowerCase();
                     include = rowValue.indexOf(filterValue) > -1;
                     if (include) {
-                        return false;
+                        break;
                     }
-                }.bind(this));
+                }
 
                 return include;
             }.bind(this));
