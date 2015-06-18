@@ -20,6 +20,9 @@ describe('Table.filter', function() {
 
     beforeEach(function() {
         table = new TableClass(testOptions);
+        table.filter.set({
+            all: ['name', 'location', 'country']
+        });
     });
 
     describe('init', function() {

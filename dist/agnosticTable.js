@@ -16,7 +16,7 @@ var TableClass = (function () {
         this.keys = options.keys;
 
         this.order = tableOrder.bind(this)();
-        this.filter = tableFilter.bind(this)(options.filters);
+        this.filter = tableFilter.bind(this)();
         this.paginate = tablePaginate.bind(this)(options.paginate);
 
         this.digest();
@@ -34,7 +34,7 @@ var TableClass = (function () {
 module.exports = TableClass;
 
 },{"./tableFilter":3,"./tableOrder":4,"./tablePaginate":5}],3:[function(require,module,exports){
-var filter = function (filters) {
+var filter = function () {
     'use strict';
 
     var table = this;
@@ -44,12 +44,17 @@ var filter = function (filters) {
     _filter.rows = [];
 
     _filter.filters = {};
-    for (var filterKey in filters) {
-        _filter.filters[filterKey] = {
-            value: '',
-            whiteList: filters[filterKey]
-        };
-    }
+
+    _filter.set = function (filters) {
+        for (var filterKey in filters) {
+            this.filters[filterKey] = {
+                value: '',
+                whiteList: filters[filterKey]
+            };
+        }
+
+        return this;
+    };
 
     _filter.onValChange = function () {
         table.paginate.currentPage = 0;
@@ -178,7 +183,7 @@ var paginate = function (options) {
         return pages;
     };
 
-    // `disableButtons` returns `true` if view's `previous` and `next` buttons should be disabled
+    // `shouldNavBeDisabled` returns `true` if view's `previous` and `next` buttons should be disabled
     var shouldNavBeDisabled = function () {
         var shouldBeDisabled = this.numOfPages <= 1;
         return shouldBeDisabled;

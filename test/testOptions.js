@@ -40,15 +40,7 @@ options.keys = [
     {
         display: 'Country',
         value: 'country'
-    },
-    {
-        display: 'Links',
-        value: 'links'
     }
 ];
-
-options.filters = {
-    all: ['name', 'location', 'country']
-};
 
 module.exports = options;

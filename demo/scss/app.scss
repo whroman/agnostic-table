@@ -12,6 +12,10 @@
     background-color: #F5F5F5;
 }
 
+#body .bg-gray-md {
+    background-color: #999;
+}
+
 #body .button-group .column {
     margin: 0;
 }
@@ -73,4 +77,8 @@ label,
 [type="submit"],
 .clickable {
     cursor: pointer;
+}
+
+code ul {
+    list-style: none;
 }

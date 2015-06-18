@@ -11,7 +11,13 @@
     <div class="row">
         <div class="small-11 column">
             <h1>Agnostic Table</h1>
-            <h4>A lean client-side view-framework-agnostic table abstraction for Javascript</h4>
+            <h4>A 2.5kb* client-side view-framework-agnostic table abstraction for Javascript</h4>
+
+            <div>* when g-zipped. 4kb otherwise.</div>
+
+            <hr>
+
+            <h2>Features</h2>
             <ul>
                 <li>
                     <h5>Pagination</h5>
@@ -28,12 +34,27 @@
                         <li>Forward and reverse sorting</li>
                     </ul>
                 </li>
-                <li>
-                    <h5>Minified script size is 4kb</h5>
-                </li>
             </ul>
             <hr>
-            <h1>Angular</h1>
+            <h2>Angular Demo</h2>
+
+            <code class="width-full left">
+                <ul>
+                    <li>&lt;input</li>
+                    <li>
+                        <ul>
+                            <li>type="text"</li>
+                            <li>placeholder="Search by Name, Location or Country"</li>
+                            <li>ng-model="table.filter.filters.all.value"</li>
+                            <li>ng-change="table.filter.onValChange()"</li>
+                            <li>class="width-full"</li>
+                        </ul>
+                    </li>
+                    <li>&gt;</li>
+                </ul>
+
+
+            </code>
 
             <div
                 ng-app="ControllerTeamsList"
@@ -48,8 +69,7 @@
                             placeholder="Search by Name, Location or Country"
                             ng-model="table.filter.filters.all.value"
                             ng-change="table.filter.onValChange()"
-                            tabindex="1"
-                            class="text-xxs text-gray-dark text-thin width-full spacer-xl pad bg-white"
+                            class="width-full"
                         />
                     </div>
                 </div>
@@ -62,7 +82,7 @@
                             ng-model="table.filter.filters.name.value"
                             ng-change="table.filter.onValChange()"
                             tabindex="1"
-                            class="text-xxs text-gray-dark text-thin width-full spacer-xl pad bg-white"
+                            class="text-gray-dark width-full spacer-xl pad bg-white"
                         />
                     </div>
                     <div class="column small-4">
@@ -72,7 +92,7 @@
                             ng-model="table.filter.filters.location.value"
                             ng-change="table.filter.onValChange()"
                             tabindex="1"
-                            class="text-xxs text-gray-dark text-thin width-full spacer-xl pad bg-white"
+                            class="text-gray-dark width-full spacer-xl pad bg-white"
                         />
                     </div>
                     <div class="column small-4">
@@ -82,7 +102,7 @@
                             ng-model="table.filter.filters.country.value"
                             ng-change="table.filter.onValChange()"
                             tabindex="1"
-                            class="text-xxs text-gray-dark text-thin width-full spacer-xl pad bg-white"
+                            class="text-gray-dark width-full spacer-xl pad bg-white"
                         />
                     </div>
                 </div>
@@ -93,7 +113,7 @@
                         <th
                             ng-repeat="keyObj in table.keys"
                             ng-click="table.order.set(keyObj.value)"
-                            class="text-white text-thin unselectable"
+                            class="text-white unselectable"
                             ng-class="{
                                 'selected'    : table.order.latestInput === keyObj.value,
                                 'reversed'    : table.order.latestInput === keyObj.value && table.order.reverse
@@ -143,8 +163,8 @@
                             class="column small-4"
                         >
                             <div
-                                ng-class="{disabled : table.paginate.disableButtons()}"
-                                class="text-xxs width-full pad text-center button"
+                                ng-class="{'bg-gray-md' : table.paginate.disabled}"
+                                class="width-full pad text-center button"
                             >
                                 <div class="text-valign">Previous</div>
                             </div>
@@ -157,21 +177,24 @@
                             class="column small-4"
                         >
                             <div
-                                ng-class="{disabled : table.paginate.disableButtons()}"
-                                class="text-xxs width-full pad text-center button"
+                                ng-class="{'bg-gray-md' : table.paginate.disabled}"
+                                class="width-full pad text-center button"
                             >
                                 <div class="text-valign">Next</div>
                             </div>
                         </li>
                     </ul>
                 </div>
-
             </div>
 
         </div>
     </div>
     <script type="text/javascript" src="./dist/agnosticTable.js"></script>
 
+    <script type="text/javascript" src="./node_modules/foundation-sites/js/foundation.min.js"></script>
     <script type="text/javascript" src="./demo/build/build.js"></script>
+    <script type="text/javascript">
+        
+    </script>
 </body>
 </html>

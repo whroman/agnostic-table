@@ -8,29 +8,36 @@ angular.module('ControllerTeamsList', [])
     $scope,
     $window
 ){
-    var tableOptions = {};
-    tableOptions.rows = teams;
-    tableOptions.keys = [
+    var tableData = {};
+    // Data to be displayed in table. Should be an Array.
+    tableData.rows = teams;
+
+
+    tableData.keys = [
         {
             display: 'Name',
-            value: 'name',
+            value: 'name'
         },
         {
             display: 'Location',
-            value: 'location',
+            value: 'location'
         },
         {
             display: 'Country',
-            value: 'country',
+            value: 'country'
         }
     ];
-    tableOptions.filters = {};
-    tableOptions.filters.all = ['name', 'location', 'country'];
-    tableOptions.filters.name = ['name'];
-    tableOptions.filters.location = ['location'];
-    tableOptions.filters.country = ['country'];
 
-    $scope.table = new agnosticTable(tableOptions);
+    $scope.table = new agnosticTable(tableData);
+
+    // Defining filters
+    $scope.table.filter.set({
+        all: ['name', 'location', 'country'],
+        name: ['name'],
+        location: ['location'],
+        country: ['country']
+    });
+
     $scope.table.order.set('country');
 
     $scope.typeOf = function(input) {
