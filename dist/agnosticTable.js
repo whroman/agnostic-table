@@ -51,24 +51,6 @@ var filter = function (filters) {
         };
     }
 
-    /*
-     _filter.keys = [String]
-
-    Each item is the name of a property that each row object should contain.
-    When the table rows are filtered, `_filter.value` will only look for the value in
-        the property names listed here.
-    */
-    _filter.keys = [];
-    var filterIndex, filterObj;
-    for (filterIndex in filters) {
-        filterObj = filters[filterIndex];
-        if (filterObj.filter === true) {
-            _filter.keys.unshift(filterObj.value);
-        }
-    }
-
-
-
     _filter.onValChange = function () {
         table.paginate.currentPage = 0;
         table.digest();
@@ -81,7 +63,7 @@ var filter = function (filters) {
         var _filterRows = function (row) {
             var include = false;
 
-            // Create version of row that only contains properties in `filter.keys` list
+            // Create version of row that only contains properties listed in the `currentFilter.whiteList` Array
             var filteredRow = {};
             var whiteListedKeysIndex = currentFilter.whiteList.length;
             var key;

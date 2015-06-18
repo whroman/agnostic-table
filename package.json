@@ -8,28 +8,25 @@
     "test": "istanbul cover _mocha -- -R spec",
     "prestart": "eslint ./lib",
     "start": "browserify ./index.js -o ./dist/agnosticTable.js; uglifyjs ./dist/agnosticTable.js -c -o ./dist/agnosticTable.min.js",
-    "poststart": "browserify ./demo/js/index.js --debug -o ./demo/build/build.js"
+    "poststart": "browserify ./demo/js/index.js --debug -o ./demo/build/build.js; node-sass --output-style compressed ./demo/scss/app.scss ./demo/build/build.css"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "angular": "^1.4.1",
     "backbone": "^1.2.1",
+    "browserify": "^10.2.4",
     "chai": "^3.0.0",
     "codeclimate-test-reporter": "0.0.4",
     "eslint": "^0.23.0",
-    "foundation": "^4.2.1-1",
     "foundation-sites": "^5.5.2",
     "istanbul": "^0.3.15",
     "jquery": "^2.1.4",
+    "lodash": "^3.9.3",
     "mocha": "^2.2.5",
+    "node-sass": "^3.2.0",
     "react": "^0.13.3",
     "reflux": "^0.2.8",
-    "uglify-js": "^2.4.23",
-    "uglifyify": "^3.0.1"
-  },
-  "dependencies": {
-    "browserify": "^10.2.4",
-    "lodash": "^3.9.3"
+    "uglify-js": "^2.4.23"
   }
 }
