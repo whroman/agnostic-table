@@ -14,19 +14,21 @@ angular.module('ControllerTeamsList', [])
         {
             display: 'Name',
             value: 'name',
-            filter: true
         },
         {
             display: 'Location',
             value: 'location',
-            filter: true
         },
         {
             display: 'Country',
             value: 'country',
-            filter: true
         }
     ];
+    tableOptions.filters = {};
+    tableOptions.filters.all = ['name', 'location', 'country'];
+    tableOptions.filters.name = ['name'];
+    tableOptions.filters.location = ['location'];
+    tableOptions.filters.country = ['country'];
 
     $scope.table = new agnosticTable(tableOptions);
     $scope.table.order.set('country');

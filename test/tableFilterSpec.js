@@ -34,11 +34,14 @@ describe('Table.filter', function() {
     });
 
     describe('.digest()', function() {
-        it('should filter rows by table.filter.value', function() {
+        it('should filter rows by table.filter.filters[filterName].value', function() {
             var key, val;
             for (key in expectMap) {
+                console.log(table.filter.filters);
+
                 val = expectMap[key];
-                table.filter.value = key;
+                table.filter.filters.all.value = key;
+
                 table.digest();
                 assert.equal(table.filter.rows.length, val, [key, val]);
             }

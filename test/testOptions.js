@@ -31,23 +31,24 @@ options.rows = [
 options.keys = [
     {
         display: 'Name',
-        value: 'name',
-        filter: true
+        value: 'name'
     },
     {
         display: 'Location',
-        value: 'location',
-        filter: true
+        value: 'location'
     },
     {
         display: 'Country',
-        value: 'country',
-        filter: true
+        value: 'country'
     },
     {
         display: 'Links',
         value: 'links'
     }
 ];
+
+options.filters = {
+    all: ['name', 'location', 'country']
+};
 
 module.exports = options;

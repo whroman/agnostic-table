@@ -31,3 +31,44 @@
 [ng-cloak] {
     display: none;
 }
+
+.table-arrow {
+    font-size: 10px;
+    position: absolute;
+    top: 13px;
+    right: 7px;
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+.selected {
+    background-color: #DDD;
+}
+
+.selected .table-arrow {
+    display: inline-block;
+    border-left: 0.5em solid transparent;
+    border-right: 0.5em solid transparent;
+    border-bottom: 0 solid transparent;
+    border-top: 0.8em solid #222;
+}
+
+.selected.reversed .table-arrow {
+    border-left: 0.5em solid transparent;
+    border-right: 0.5em solid transparent;
+    border-bottom: 0.8em solid #222;
+    border-top: 0 solid transparent;
+}
+
+table th {
+    position: relative;
+}
+
+a,
+label,
+[ng-click],
+[type="submit"],
+.clickable {
+    cursor: pointer;
+}
