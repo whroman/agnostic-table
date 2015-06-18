@@ -19,10 +19,11 @@ describe('Table.filter', function() {
     var table;
 
     beforeEach(function() {
-        table = new TableClass(testOptions);
-        table.filter.set({
+        testOptions.filters = {
             all: ['name', 'location', 'country']
-        });
+        };
+
+        table = new TableClass(testOptions);
     });
 
     describe('init', function() {
@@ -37,16 +38,37 @@ describe('Table.filter', function() {
     });
 
     describe('.digest()', function() {
-        it('should filter rows by table.filter.filters[filterName].value', function() {
+        it('should filter rows by table.filters[filterName].value', function() {
             var key, val;
             for (key in expectMap) {
-                console.log(table.filter.filters);
-
                 val = expectMap[key];
-                table.filter.filters.all.value = key;
-
+                table.filters.all.value = key;
                 table.digest();
                 assert.equal(table.filter.rows.length, val, [key, val]);
+            }
+        });
+    });
+
+
+    describe('.onValChange()', function() {
+        it('and re-digest all table actions', function() {
+            var key, val;
+            for (key in expectMap) {
+                val = expectMap[key];
+                table.filters.all.value = key;
+                table.filter.onValChange();
+                assert.equal(table.filter.rows.length, val, [key, val]);
+            }
+        });
+
+        it('should set pagination page to 0', function() {
+            var key, val;
+            for (key in expectMap) {
+                val = expectMap[key];
+                table.filters.all.value = key;
+                table.filter.onValChange();
+                assert.equal(table.paginate.currentPage, 0, [key, val]);
+                assert.equal(table.paginate.firstRow, 0, [key, val]);
             }
         });
     });
